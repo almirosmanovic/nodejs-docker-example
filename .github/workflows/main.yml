@@ -15,7 +15,7 @@ jobs:
         run: sudo apt-get -y install gettext-base
 
       - name: Import Secrets
-        uses: hashicorp/vault-action@v1.0.1
+        uses: hashicorp/vault-action@v2.0.1
         id: secrets
         with:
           url: ${{ secrets.VAULT_URL }}    # Address of running Vault instance
@@ -26,7 +26,7 @@ jobs:
           #   /aws/creds/ecr-push access_key | AWS_ACCESS_KEY_ID ;
           #   /aws/creds/ecr-push secret_key | AWS_SECRET_ACCESS_KEY
           secrets: |
-              /ce-area/test/app.config msg | VAULT_MSG ;
+              /ce-vault-demo/test/app.config msg | VAULT_MSG
       
       - name: Populate .env with env vars
         run: sudo envsubst < .envtemp > .env         
