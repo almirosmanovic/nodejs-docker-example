@@ -21,6 +21,7 @@ jobs:
           url: ${{ secrets.VAULT_URL }}    # Address of running Vault instance
           token: ${{ secrets.VAULT_TOKEN }} 
           exportEnv: true
+          tlsSkipVerify: true 
           # Alternative using IAM user (https://www.vaultproject.io/docs/secrets/aws#usage):
           # secrets: |
           #   /aws/creds/ecr-push access_key | AWS_ACCESS_KEY_ID ;
