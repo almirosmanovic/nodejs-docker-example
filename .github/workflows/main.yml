@@ -11,9 +11,27 @@ jobs:
     steps:
       - name: Checkout the repository
         uses: actions/checkout@v1
+      - name: Install envsubst
+        run: sudo apt-get -y install gettext-base
 
+      - name: Import Secrets
+        uses: hashicorp/vault-action@v1.0.1
+        id: secrets
+        with:
+          url: ${{ secrets.VAULT_URL }}    # Address of running Vault instance
+          token: ${{ secrets.VAULT_TOKEN }} 
+          exportEnv: true
+          # Alternative using IAM user (https://www.vaultproject.io/docs/secrets/aws#usage):
+          # secrets: |
+          #   /aws/creds/ecr-push access_key | AWS_ACCESS_KEY_ID ;
+          #   /aws/creds/ecr-push secret_key | AWS_SECRET_ACCESS_KEY
+          secrets: |
+              /ce-area/test/app.config msg | VAULT_MSG ;
+      
+      - name: Populate .env with env vars
+        run: sudo envsubst < .envtemp > .env         
+      
       - name: Build Docker image
-        run: |
           docker build . --tag eu.gcr.io/${{ secrets.GCLOUD_PROJECT }}/${{ secrets.GCLOUD_APP_NAME }}
       - name: Authenticate into Google Cloud Platform
         uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
