@@ -1,15 +1,15 @@
 # Buildkite Node.js Docker Example
 
-[![Add to Buildkite](https://buildkite.com/button.svg)](https://buildkite.com/new)
+![Deploy the application to Google Cloud Run](https://github.com/almirosmanovic/nodejs-docker-example/workflows/Deploy%20the%20application%20to%20Google%20Cloud%20Run/badge.svg)
 
-This repository is an example on how to test a [Node.js](https://nodejs.org/) project using [Buildkite](https://buildkite.com/) and [Docker](https://docker.com/). It uses the standard [Node.js Docker image](https://hub.docker.com/_/node/) and [Buildkite’s Docker-based Builds](https://buildkite.com/docs/guides/docker-containerized-builds).
+This repository is an example on how to test a [Node.js](https://nodejs.org/) project using [Buildkite](https://buildkite.com/) and [Docker](https://docker.com/). It uses the standard [Node.js Docker image](https://hub.docker.com/_/node/)
 
 ## Running locally
 
 To run the test locally on your development machine, you can run:
 
 ```bash
-docker-compose run app npm test
+docker-compose run app
 ```
 
 ## License
