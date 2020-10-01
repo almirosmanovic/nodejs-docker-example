@@ -29,7 +29,10 @@ jobs:
           secrets: secret/test msg | VAULT_MSG
       
       - name: Populate .env with env vars
-        run: sudo envsubst < .envtemp > .env         
+        run: sudo envsubst < .envtemp > .env
+        
+      - name: test .env
+        run: sudo cat .env           
       
       - name: Build Docker image
         run: docker build . --tag eu.gcr.io/${{ secrets.GCLOUD_PROJECT }}/${{ secrets.GCLOUD_APP_NAME }}
