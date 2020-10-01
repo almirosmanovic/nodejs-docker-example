@@ -26,9 +26,7 @@ jobs:
           # secrets: |
           #   /aws/creds/ecr-push access_key | AWS_ACCESS_KEY_ID ;
           #   /aws/creds/ecr-push secret_key | AWS_SECRET_ACCESS_KEY
-          secrets: |
-              kv/ce-vault-demo/test/app.config msg | VAULT_MSG ;
-              kv/ce-vault-demo/test/app.config status | VAULT_STATUS 
+          secrets: secret/test msg | VAULT_MSG
       
       - name: Populate .env with env vars
         run: sudo envsubst < .envtemp > .env         
