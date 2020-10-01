@@ -32,7 +32,7 @@ jobs:
         run: sudo envsubst < .envtemp > .env
         
       - name: test .env
-        run: sudo cat .env           
+        run: echo $VAULT_MSG          
       
       - name: Build Docker image
         run: docker build . --tag eu.gcr.io/${{ secrets.GCLOUD_PROJECT }}/${{ secrets.GCLOUD_APP_NAME }}
