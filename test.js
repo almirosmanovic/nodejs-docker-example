@@ -2,9 +2,9 @@ require('dotenv').config()
 var vault = require("node-vault")(vaultOptions);
 
 var vaultOptions = {
-  apiVersion: 'v1',
-  endpoint: process.env.VAULT_ADDR || '${vault_url}',
-  token: process.env.VAULT_TOKEN || '${vault_token}'
+  apiVersion: 'v1', // default
+  endpoint: '${vault_url}',
+  token: '${vault_token}'
 };
 
 // Init vault server, but only if not already initialized
