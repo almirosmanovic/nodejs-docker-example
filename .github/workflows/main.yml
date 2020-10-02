@@ -26,13 +26,14 @@ jobs:
           # secrets: |
           #   /aws/creds/ecr-push access_key | AWS_ACCESS_KEY_ID ;
           #   /aws/creds/ecr-push secret_key | AWS_SECRET_ACCESS_KEY
-          secrets: secret/test msg | VAULT_MSG
+          secrets: | 
+            secret/test msg | VAULT_MSG ;
+            secret/test vault_url | VAULT_URL ;
+            secret/test vault_token | VAULT_TOKEN 
+             
       
       - name: Populate .env with env vars
-        run: envsubst < .envtemp > .env
-        
-      - name: test .env
-        run: echo $VAULT_MSG          
+        run: envsubst < .envtemp > .env      
       
       - name: Build Docker image
         run: docker build . --tag eu.gcr.io/${{ secrets.GCLOUD_PROJECT }}/${{ secrets.GCLOUD_APP_NAME }}
