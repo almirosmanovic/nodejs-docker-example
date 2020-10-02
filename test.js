@@ -1,4 +1,29 @@
 require('dotenv').config()
+var vault = require("node-vault")(vaultOptions);
+
+var vaultOptions = {
+  apiVersion: 'v1',
+  endpoint: process.env.VAULT_ADDR || '${vault_url}',
+  token: process.env.VAULT_TOKEN || '${vault_token}'
+};
+
+// Init vault server, but only if not already initialized
+vault.initialized()
+.then((result) => {
+  console.log(result);
+  return vault.init({ secret_shares: 1, secret_threshold: 1 });
+})
+.then((result) => {
+  console.log(result);
+  vault.token = result.root_token;
+  const key = result.keys[0];
+  return vault.unseal({ secret_shares: 1, key });
+})
+.then((result) => {
+  console.log(result);
+  return vault.write(ns, { message: 'Hello World' });
+})
+.catch((err) => console.error(err.message));
 const http = require('http');
 
 // Read the host address and the port from the environment
