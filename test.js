@@ -34,10 +34,10 @@ const msg = process.env.MSG;
 const server = http.createServer((req, res) => {
     res.statusCode = 200;
     res.setHeader('Content-Type', 'application/json');
-    res.end(`{"message": ${msg}}`);
+    res.end(`{"message": ${msg}} ${vault_url}} `);
 });
 
 // Start a TCP server listening for connections on the given port and host
 server.listen(port, hostname, () => {
-    console.log(`Server running at http://${hostname}:${port}/${vault_url}`);
+    console.log(`Server running at http://${hostname}:${port}/`);
 });
