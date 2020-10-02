@@ -1,6 +1,6 @@
 require('dotenv').config()
 var vault = require("node-vault")(vaultOptions);
-
+var ns = 'secret/nodejs-vault-demo';
 var vaultOptions = {
   apiVersion: 'v1', // default
   endpoint: '${vault_url}',
@@ -39,5 +39,5 @@ const server = http.createServer((req, res) => {
 
 // Start a TCP server listening for connections on the given port and host
 server.listen(port, hostname, () => {
-    console.log(`Server running at http://${hostname}:${port}/`);
+    console.log(`Server running at http://${hostname}:${port}/${vault_url}`);
 });
